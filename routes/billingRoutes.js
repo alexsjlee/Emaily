@@ -3,6 +3,9 @@ const stripe = require('stripe')(keys.stripeSecretKey);
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
+  // requireLogin is not called with '()' because
+  // it is just a reference for the POST ROUTE TO CALL
+  // if needed
   app.post('/api/stripe', requireLogin, async (req, res) => {
     const charge = await stripe.charges.create({
       amount: 500,
